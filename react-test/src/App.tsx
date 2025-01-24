@@ -1,7 +1,9 @@
+import { Hello } from "./components/Hello"
+
 function App() {
   return (
     <>
-      HELLO
+      <Hello></Hello>
     </>
   )
 }
