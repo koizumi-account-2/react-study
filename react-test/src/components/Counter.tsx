@@ -8,7 +8,8 @@ export const Counter = () => {
         console.log(`clickEvent start count:${count}`);
         // const newCounnt = count + 1;
         // setCount(newCounnt)
-        setCount(prev => prev++);
+        setCount(prev => prev + 1);
+        // setCount(prev => prev++);
         console.log(`clickEvent end count:${count}`);
     }
     console.log("B")
