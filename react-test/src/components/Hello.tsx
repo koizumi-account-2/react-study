@@ -1,16 +1,24 @@
 import React from "react"
 
 export const Hello:React.FC = ()=>{
+    const str = 'hello';
+    const num = 123;
+    const bool = true;
+    const obj = {
+        name: 'taro'
+    };
+    const ary = [10,20,30];
+    const greet = (name:string):string=>{
+        return `こんにちは!${name}さん`;
+    }
     return (
-        <React.Fragment>
-            <h1>AAA</h1>
-            <h1>BBB</h1>
-            <h1>CCC</h1>
-        </React.Fragment>
-        // <React.Fragment>
-        //     <h1>AAA</h1>
-        //     <h1>BBB</h1>
-        //     <h1>CCC</h1>
-        // </React.Fragment>
+        <>
+            <p>{str}</p>
+            <p>{num}</p>
+            <p>{bool}</p>
+            {/* <p>{obj}</p>  エラー*/} 
+            <p>{ary}</p>
+            <p>{greet(obj.name)}</p>
+        </>
     )
 }
