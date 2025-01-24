@@ -1,18 +1,20 @@
-import { Hello } from "./components/Hello"
-import { Parent1, Parent2, Parent3, Parent4 } from "./components/Parent"
+import { Event } from "./components/Event"
+import { MyButton } from "./components/MyButton"
 
 function App() {
+  const eventA = ()=>{
+    console.log('Aがクリックされました');
+  }
+  const eventB = ()=>{
+    alert('Bがクリックされました')
+  }
+
+
   return (
     <>
-      <Hello></Hello>
-      <h3>Parent1</h3>
-      <Parent1></Parent1>
-      <h3>Parent2</h3>
-      <Parent2></Parent2>
-      <h3>Parent3</h3>
-      <Parent3></Parent3>
-      <h3>Parent4</h3>
-      <Parent4></Parent4>
+      <Event></Event>
+      <MyButton clickEvent={eventA} label="ボタンA"></MyButton>
+      <MyButton clickEvent={eventB} label="ボタンB"></MyButton>
     </>
   )
 }
