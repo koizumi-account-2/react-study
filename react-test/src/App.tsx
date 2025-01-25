@@ -1,9 +1,9 @@
-import { Profile } from "./components/Profile"
+import { Clock } from "./components/Clock"
 
 function App() {
   return (
     <>
-      <Profile/>
+      <Clock/>
     </>
   )
 }
