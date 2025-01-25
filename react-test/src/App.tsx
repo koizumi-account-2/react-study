@@ -1,9 +1,12 @@
-import { Clock } from "./components/Clock"
+import { useState } from "react"
+import { Effect } from "./components/Effect"
 
 function App() {
+  const [isShow,setShow] = useState(true);
   return (
     <>
-      <Clock/>
+      <button onClick={()=>setShow(prev => !prev)}>切り替え</button>
+      {isShow && <Effect/>}
     </>
   )
 }
