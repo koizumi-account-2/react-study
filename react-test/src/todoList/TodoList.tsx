@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Todo } from "./types";
 import { TodoContent } from "./TodoContent";
 import { InputComponent } from "./InputComponent";
@@ -17,9 +17,9 @@ export const TodoList = () => {
     const [todos, setTodos] = useState<Todo[]>(todoList);
 
     // todoの追加
-    const addTodo = (content:string)=>{
-        setTodos([...todos,{id:generateId(),content}]);
-    }
+    const addTodo = useCallback((content:string)=>{
+        setTodos(prev => [...prev,{id:generateId(),content}]);
+    },[setTodos])
     // todoの削除
     const deleteTodo = (id:string)=>{
         const newTodos = todos.filter(todo => todo.id !== id);

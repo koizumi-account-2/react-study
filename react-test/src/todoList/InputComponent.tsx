@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 
 type InputComponent = {
     clickEvent:(inputVal:string)=>void
 }
 
-export const InputComponent:React.FC<InputComponent> = ({clickEvent}) => {
+export const InputComponent:React.FC<InputComponent> = memo(({clickEvent}) => {
+    console.log("Input")
     // 入力値の管理
     const [inputVal,setInputVal] = useState<string>("");
 
@@ -24,5 +25,5 @@ export const InputComponent:React.FC<InputComponent> = ({clickEvent}) => {
             <button onClick={clickHandler}>追加</button>
         </>
     )
-}
+})
 
