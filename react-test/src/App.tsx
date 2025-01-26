@@ -1,12 +1,9 @@
-import { useState } from "react"
-import { Effect } from "./components/Effect"
+import { List } from "./components/List"
 
 function App() {
-  const [isShow,setShow] = useState(true);
   return (
     <>
-      <button onClick={()=>setShow(prev => !prev)}>切り替え</button>
-      {isShow && <Effect/>}
+      <List/>
     </>
   )
 }
