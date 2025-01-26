@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Todo } from "./types";
-import { TodoInput } from "./TodoInput";
 import { TodoContent } from "./TodoContent";
+import { InputComponent } from "./InputComponent";
+
+const generateId = () => Math.random().toString(36).substring(2, 9);
+
 
 export const TodoList = () => {
     // 初期値
@@ -14,8 +17,8 @@ export const TodoList = () => {
     const [todos, setTodos] = useState<Todo[]>(todoList);
 
     // todoの追加
-    const addTodo = (todo:Todo)=>{
-        setTodos([...todos,todo]);
+    const addTodo = (content:string)=>{
+        setTodos([...todos,{id:generateId(),content}]);
     }
     // todoの削除
     const deleteTodo = (id:string)=>{
@@ -26,7 +29,7 @@ export const TodoList = () => {
     return (
         <>
             <div>TodoList</div>
-            <TodoInput addTodo={addTodo}/>
+            <InputComponent clickEvent={addTodo}/>
             <ul>
                 {todos.map(todo =>  <TodoContent key={todo.id} todo={todo} deleteTodo={deleteTodo}/>)}
             </ul>
