@@ -19,10 +19,10 @@ export const InputComponent:React.FC<InputComponent> = ({clickEvent}) => {
         setInputVal("");
     }
     return (
-        <>
+        <div>
             <input type="text" onChange={changeHandler} value={inputVal}/>
             <button onClick={clickHandler}>追加</button>
-        </>
+        </div>
     )
 }
 
