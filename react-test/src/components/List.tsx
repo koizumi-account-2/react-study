@@ -4,12 +4,15 @@ export const List = () => {
     const defaultFriends = ["佐藤","鈴木","田中"];
     const [friends,setFriends] = useState(defaultFriends);
     const clickHandler = ()=>{
-        setFriends(["山田",...friends])
+		    // 先頭の要素を削除
+        setFriends(friends.slice(1))
     }
     return (
         <>  
-            <button onClick={clickHandler}>追加</button>
-            {friends.map(friend => <li key={friend}>{friend}</li>)}
+            <button onClick={clickHandler}>削除</button>
+            {/* indexをkeyとして使用する */}
+            {friends.map(friend => <input type="text" defaultValue={friend} key={friend}/>)}
+    
         </>
     )
 }
