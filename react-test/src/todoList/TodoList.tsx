@@ -13,13 +13,22 @@ export const TodoList = () => {
     // todoListの管理
     const [todos, setTodos] = useState<Todo[]>(todoList);
 
-
+    // todoの追加
+    const addTodo = (todo:Todo)=>{
+        setTodos([...todos,todo]);
+    }
+    // todoの削除
+    const deleteTodo = (id:string)=>{
+        const newTodos = todos.filter(todo => todo.id !== id);
+        setTodos(newTodos);
+    }
+    
     return (
         <>
             <div>TodoList</div>
-            <TodoInput todos={todos} setTodos={setTodos}/>
+            <TodoInput addTodo={addTodo}/>
             <ul>
-                {todos.map(todo =>  <TodoContent key={todo.id} todo={todo} todos={todos} setTodos={setTodos}/>)}
+                {todos.map(todo =>  <TodoContent key={todo.id} todo={todo} deleteTodo={deleteTodo}/>)}
             </ul>
         </>
     )

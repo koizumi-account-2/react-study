@@ -2,12 +2,11 @@ import { useState } from "react";
 import { Todo } from "./types";
 
 type TodoInput = {
-    todos:Todo[],
-    setTodos:React.Dispatch<React.SetStateAction<Todo[]>>
+    addTodo:(todo:Todo)=>void
 }
 
 const generateId = () => Math.random().toString(36).substring(2, 9);
-export const TodoInput:React.FC<TodoInput> = ({todos,setTodos}) => {
+export const TodoInput:React.FC<TodoInput> = ({addTodo}) => {
     // 入力値の管理
     const [inputVal,setInputVal] = useState<string>("");
 
@@ -18,7 +17,7 @@ export const TodoInput:React.FC<TodoInput> = ({todos,setTodos}) => {
 
     // 追加ボタンのクリックハンドラ
     const clickHandler = ()=>{
-        setTodos([...todos,{id:generateId(),content:inputVal}]);
+        addTodo({id:generateId(),content:inputVal});
         setInputVal("");
     }
     return (
