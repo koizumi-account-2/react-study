@@ -1,9 +1,8 @@
-import { TodoList } from "./todoList/TodoList"
 
 function App() {
   return (  
     <>
-      <TodoList/>
+      <ReducerTest/>
     </>
   )
 }
