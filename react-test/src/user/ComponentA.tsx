@@ -6,11 +6,12 @@ import { MyContext } from "./user";
 export const ComponentA = () => {
     console.log("A render")
     const [user , setUser] = useState<string>("");
+
     return (
-        <MyContext.Provider value="Tom">
+        <MyContext.Provider value={{user,setUser}}>
             <h3>ComponentA</h3>
-            <ComponentB setUser={setUser}/>
-            <ComponentC user={user}/>
+            <ComponentB />
+            <ComponentC />
         </MyContext.Provider>
     )
 }

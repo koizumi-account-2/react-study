@@ -1,11 +1,11 @@
 import { ComponentE } from "./ComponentE"
 
-export const ComponentC = ({user}:{user:string}) => {
+export const ComponentC = () => {
     console.log("C render")
     return (
         <div>
             <h3>#ComponentC</h3>
-            <ComponentE user={user}/>
+            <ComponentE/>
         </div>
     )
 }
