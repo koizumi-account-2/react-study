@@ -1,9 +1,9 @@
-import { ComponentA } from "./user/ComponentA"
+import { ReducerTest } from "./components/ReducerTest"
 
 function App() {
   return (  
     <>
-      <ComponentA/>
+      <ReducerTest/>
     </>
   )
 }
