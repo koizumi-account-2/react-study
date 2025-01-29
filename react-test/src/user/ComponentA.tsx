@@ -1,17 +1,16 @@
-import { useState } from "react"
 import { ComponentB } from "./ComponentB";
 import { ComponentC } from "./ComponentC";
-import { MyContext } from "./user";
+import { UsertProvider } from "./UsertProvider";
 
 export const ComponentA = () => {
     console.log("A render")
-    const [user , setUser] = useState<string>("");
+    
 
     return (
-        <MyContext.Provider value={{user,setUser}}>
+        <UsertProvider>
             <h3>ComponentA</h3>
             <ComponentB />
             <ComponentC />
-        </MyContext.Provider>
+        </UsertProvider>
     )
 }
