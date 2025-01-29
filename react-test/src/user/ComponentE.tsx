@@ -1,9 +1,8 @@
-import { useContext } from "react"
-import { UserContext } from "./UserProvider";
+import { useUserContext } from "./UserProvider";
 
 export const ComponentE = () => {
     console.log("E render")
-    const context = useContext(UserContext);
+    const context = useUserContext();
     return (
         <div>
             <h3>##ComponentE</h3>
