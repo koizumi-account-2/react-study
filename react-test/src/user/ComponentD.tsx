@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { UserContext } from "./UsertProvider";
+import { UserContext } from "./UserProvider";
 
 export const ComponentD = () => {
     console.log("D render")

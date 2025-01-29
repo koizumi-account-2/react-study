@@ -1,16 +1,16 @@
 import { ComponentB } from "./ComponentB";
 import { ComponentC } from "./ComponentC";
-import { UsertProvider } from "./UsertProvider";
+import { UserProvider } from "./UserProvider";
 
 export const ComponentA = () => {
     console.log("A render")
     
 
     return (
-        <UsertProvider>
+        <UserProvider>
             <h3>ComponentA</h3>
             <ComponentB />
             <ComponentC />
-        </UsertProvider>
+        </UserProvider>
     )
 }

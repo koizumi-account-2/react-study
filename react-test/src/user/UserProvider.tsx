@@ -8,7 +8,7 @@ type ContextType = {
 
 export const UserContext = createContext<ContextType | undefined>(undefined);
 
-export const UsertProvider = ({children}:{children:ReactNode}) => {
+export const UserProvider = ({children}:{children:ReactNode}) => {
 
     
     const [user, setUser] = useState<string>("");
