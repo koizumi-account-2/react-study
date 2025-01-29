@@ -1,22 +1,29 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 
-// コンテキストの型定義
-type ContextType = {
-  user: string;
-  setUser: Dispatch<SetStateAction<string>>;
-};
+// 状態userのcontext
+const UserContext = createContext<string>("");
 
-const UserContext = createContext<ContextType | undefined>(undefined);
+// 状態更新関数setUserのcontext
+const UserDispatchContext = createContext<Dispatch<SetStateAction<string>> | undefined>(undefined);
+
 
 export const UserProvider = ({children}:{children:ReactNode}) => {
+
+    
     const [user, setUser] = useState<string>("");
     return (
-        <UserContext.Provider value={{user,setUser}}>
-            {children}
+        <UserContext.Provider value={user}>
+            <UserDispatchContext.Provider value={setUser}>
+                {children}
+            </UserDispatchContext.Provider>
         </UserContext.Provider>
     )
 }
 
 export const useUserContext = ()=>{
     return useContext(UserContext);
+}
+
+export const useUserDispatch = ()=>{
+    return useContext(UserDispatchContext);
 }
