@@ -6,9 +6,15 @@ export const Counter = () => {
 
     const countUp = ()=>{
         console.log(`clickEvent start count:${count}`);
-        // const newCounnt = count + 1;
-        // setCount(newCounnt)
+
+        // Aパターン
+        // setCount(count + 1);
+        // setCount(count + 1);
+
+        // Bパターン
         setCount(prev => prev + 1);
+        setCount(prev => prev + 1);
+
         console.log(`clickEvent end count:${count}`);
     }
     console.log("B")

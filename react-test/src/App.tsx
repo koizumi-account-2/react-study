@@ -1,9 +1,9 @@
-import { ComponentA } from "./user/ComponentA"
+import { Counter } from "./components/Counter"
 
 function App() {
   return (  
     <>
-      <ComponentA/>
+      <Counter/>
     </>
   )
 }
