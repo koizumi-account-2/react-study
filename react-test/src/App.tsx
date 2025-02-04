@@ -1,9 +1,12 @@
-import { ComponentA } from "./user/ComponentA"
+import { FoodListProvider } from "./foods/FoodListProvider"
+import { FoodManage } from "./foods/FoodManage"
 
 function App() {
   return (  
     <>
-      <ComponentA/>
+    <FoodListProvider>
+       <FoodManage/>
+    </FoodListProvider>
     </>
   )
 }
