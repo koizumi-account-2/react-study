@@ -28,6 +28,11 @@ export const Food = () => {
         if(foodListDispatch)foodListDispatch(prev => prev.map(item => item.id === editFood.id?editFood:item));
     }
 
+     const deleteFood = ()=>{
+        if(foodListDispatch)foodListDispatch(prev => prev.filter(item => item.id !== editFood.id));
+        setEditFood(defaultFood)
+     }
+
     return (
         <>
             <h2>選択したFood</h2>
@@ -37,7 +42,10 @@ export const Food = () => {
 
                     <p>名前</p><input type="text" name="name" value={editFood.name} onChange={changeHandler}/>
                     <p>値段</p><input type="text" name="price" value={editFood.price} onChange={changeHandler}/>
-                    <p><button onClick={clickHandler}>保存</button></p>
+                    <p>
+                        <button onClick={clickHandler}>保存</button>
+                        <button onClick={deleteFood}>削除</button>
+                    </p>
                 </div>
             :
             <>なし</>}
