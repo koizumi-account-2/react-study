@@ -9,7 +9,7 @@ const defaultFood:FoodType = {
 const generateId = () => Math.random().toString(36).substring(2, 4);
 export const Food = () => {
     const selectedFoodId = useSelectedIdContext();
-    const selectId = useSelectedIdDispatchContext()
+    const selectId = useSelectedIdDispatchContext();
 
     const foodList = useFoodListCotext();
     const foodListDispatch = useFoodListDispatchContext();
@@ -29,31 +29,30 @@ export const Food = () => {
     // 保存イベント
     const save = ()=>{
         console.log(editFood)
-        if(foodListDispatch){
-            // 追加処理
-            if(editFood.id === ""){
-                const newFood:FoodType = {
-                    ...editFood,
-                    id: generateId()
-                }
-                foodListDispatch(prev => [...prev,newFood]);   
-                if(selectId)selectId(newFood.id)
-            // 更新処理
-            }else{
-                foodListDispatch(prev => prev.map(item => item.id === editFood.id?editFood:item));
-            }   
-        }
+        // 追加処理
+        if(editFood.id === ""){
+            const newFood:FoodType = {
+                ...editFood,
+                id: generateId()
+            }
+            foodListDispatch?.(prev => [...prev,newFood]);   
+            selectId?.(newFood.id)
+        // 更新処理
+        }else{
+            foodListDispatch?.(prev => prev.map(item => item.id === editFood.id?editFood:item));
+        }   
+        
     }
 
     // 削除処理
     const deleteFood = ()=>{
-        if(foodListDispatch)foodListDispatch(prev => prev.filter(item => item.id !== editFood.id));
+        foodListDispatch?.(prev => prev.filter(item => item.id !== editFood.id));
         setEditFood(defaultFood)
     }
 
     // 追加処理
     const createFood = ()=>{
-        if(selectId)selectId("")
+        selectId?.("")
         setEditFood(defaultFood)
     }
 
