@@ -35,18 +35,18 @@ export const Food = () => {
                 ...editFood,
                 id: generateId()
             }
-            foodListDispatch?.(prev => [...prev,newFood]);   
+            foodListDispatch?.({type:"CREATE",payload:newFood});   
             selectId?.(newFood.id)
         // 更新処理
         }else{
-            foodListDispatch?.(prev => prev.map(item => item.id === editFood.id?editFood:item));
+            foodListDispatch?.({type:"UPDATE",payload:editFood});
         }   
         
     }
 
     // 削除処理
     const deleteFood = ()=>{
-        foodListDispatch?.(prev => prev.filter(item => item.id !== editFood.id));
+        foodListDispatch?.({type:"DELETE",payload:editFood});
         setEditFood(defaultFood)
     }
 
