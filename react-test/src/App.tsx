@@ -1,12 +1,13 @@
-import { FoodListProvider } from "./foods/FoodListProvider"
-import { FoodManage } from "./foods/FoodManage"
+import { Provider } from "react-redux"
+import { store } from "./redux/store"
+import { Counter } from "./redux/Counter"
 
 function App() {
   return (  
     <>
-    <FoodListProvider>
-       <FoodManage/>
-    </FoodListProvider>
+    <Provider store={store}>
+       <Counter/>
+    </Provider>
     </>
   )
 }
