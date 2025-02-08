@@ -1,14 +1,11 @@
-import { Provider } from "react-redux"
-import { store } from "./redux/store"
-import { Counter } from "./redux/Counter"
+import { Article } from "./article/Article"
 
 function App() {
   return (  
     <>
-    <Provider store={store}>
-       <Counter/>
-    </Provider>
+      <Article/>
     </>
+
   )
 }
 
