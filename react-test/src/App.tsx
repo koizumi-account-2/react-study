@@ -1,10 +1,13 @@
-import { Article } from "./article/Article"
+import { Provider } from "react-redux"
+import { ArticleWithRedux } from "./article/ArticleWithRedux"
+import {store} from "./article/store"
+
 
 function App() {
   return (  
-    <>
-      <Article/>
-    </>
+    <Provider store={store}>
+      <ArticleWithRedux/>
+    </Provider>
 
   )
 }

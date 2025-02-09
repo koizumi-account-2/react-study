@@ -60,7 +60,6 @@ export const Article = () => {
             <select onChange={changeHandler}>
                 {articleIdList.map(id => <option key={id} value={id}>{id>0?id:"未選択"}</option>)}
             </select>
-
             {status.status === "loading" && <div>...loading</div>}
             {status.status === "failed" && <div>FAILED : {status.message}</div>}
             {
