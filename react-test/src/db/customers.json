@@ -1,0 +1,24 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "email": "test.test@gmail.com",
+      "password": "pass"
+    },
+    {
+      "id": "2",
+      "email": "test.sample@gmail.com",
+      "password": "pass"
+    },
+    {
+      "id": "1cbb",
+      "email": "test.newSSS@gmail.com",
+      "password": "AAAAA"
+    },
+    {
+      "id": "b6f9",
+      "email": "aaa",
+      "password": "sdaasdad"
+    }
+  ]
+}

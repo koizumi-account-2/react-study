@@ -1,16 +1,9 @@
-import { Provider } from "react-redux"
-import { ArticleWithRedux } from "./article/ArticleWithRedux"
-import {store} from "./article/store"
-import { Overlay } from "./article/Overlay"
+import { Customers } from "./form/Customers"
 
 
 function App() {
   return (  
-    <Provider store={store}>
-        <Overlay/>
-        <ArticleWithRedux/> 
-    </Provider>
-
+    <Customers/>
   )
 }
 
