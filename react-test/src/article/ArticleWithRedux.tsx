@@ -4,8 +4,8 @@ import { TRootState,TAppDispatch } from "./store"
 
 export const ArticleWithRedux = () => {
     const articleIdList:number[] = [0,1,2,3,4,5]
-    const {article,status,message} = useSelector((state: TRootState) => state.article);
-    const dispatch = useDispatch<TAppDispatch>();
+    const article = useSelector((state: TRootState) => state.article.article);
+    const dispatch = useDispatch<TAppDispatch>()
     const changeHandler = async (e:React.ChangeEvent<HTMLSelectElement>)=>{
         dispatch(getArticle(e.target.value))
     }   
@@ -15,16 +15,13 @@ export const ArticleWithRedux = () => {
             <select onChange={changeHandler}>
                 {articleIdList.map(id => <option key={id} value={id}>{id>0?id:"未選択"}</option>)}
             </select>
-            {status === "loading" && <div>...loading</div>}
-            {status === "failed" && <div>FAILED : {message}</div>}
             {
-                status === "succeeded" && article && 
+                article && 
                 <div>
                     <span>{article.title}</span>
                     <div>{article.body}</div>
                 </div>
             }
-            
         </div>
     )
 }

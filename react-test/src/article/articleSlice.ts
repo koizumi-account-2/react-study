@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type TArticle =  {
     userId:number,
@@ -8,58 +8,43 @@ export type TArticle =  {
 }
 
 export type TArticleState = {
-    article: TArticle | null,
-    status:|"loading"|"succeeded"|"failed",
-    message:string
+    article: TArticle | null
 }
 
 const initialState: TArticleState = {
-    article:null,
-    status:"succeeded",
-    message:""
+    article:null
 };
 
 export const getArticle=createAsyncThunk(
     "article/getArticle",   // 一意なキー
-    async (postId:string)=>{
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
-        if(!response.ok){
-            throw new Error(`記事の取得に失敗! status:${response.status}`);
+    async (postId:string,{dispatch})=>{
+        try{
+            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+            if(!response.ok){
+                throw new Error(`記事の取得に失敗! status:${response.status}`);
+            }
+            const article = await response.json();
+            dispatch(setArticle(article)); 
+        }catch(error){
+            dispatch(clearArticle())
+            throw error;
         }
-        return response.json();
     }
 )
 
 
-const articleSlice = createSlice({
+export const articleSlice = createSlice({
     name: "article",
     initialState,
-    reducers: {},
-    extraReducers:(builder)=>{
-            builder
-            // ローデイング中の処理
-            .addCase(getArticle.pending, (state) => {
-                state.status = "loading";
-                state.message = "";
-            })
-            // fetch成功時の処理
-            .addCase(getArticle.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                state.message = "";
-                state.article = action.payload;
-            })
-            // fetch失敗時の処理
-            .addCase(getArticle.rejected, (state, action) => {
-                state.status = "failed";
-                state.article = null;
-                state.message = action.error.message || "不明なエラー";
-            });
+    reducers: {
+        setArticle:(state, action: PayloadAction<TArticle>)=>{
+            state.article = action.payload
+        },
+        clearArticle:(state)=>{
+            state.article = null;
+        }
     }
 });
 
 export default articleSlice.reducer;
-
-// ,
-//     incrementByAmount: (state, action: PayloadAction<number>) => {
-//       state.value += action.payload;
-//     }
+export const {setArticle,clearArticle} = articleSlice.actions
