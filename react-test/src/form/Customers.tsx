@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { TCustomer } from "./types";
+import axios, { AxiosResponse } from "axios";
+import axiosInstance from "./axiosInstance"
 
-const END_POINT = "http://localhost:4040/customers";
 
 const defaultCustomer:TCustomer = {
     id:"",
@@ -15,9 +16,8 @@ export const Customers = () => {
     const isEditing = editingCustomer.id !== "";
     useEffect(()=>{
         const fetchCustomers = async()=>{
-            const response = await fetch(END_POINT)
-            const data:TCustomer[] = await response.json()
-            setCustomers(data);
+            const reponse:AxiosResponse<TCustomer[]> = await axiosInstance.get('/customers');
+            setCustomers(reponse.data);
         }
         fetchCustomers();
     },[])
@@ -41,17 +41,8 @@ export const Customers = () => {
     const updateHandler = ()=>{
         const updateCustomers = async(updateCustomer:TCustomer)=>{
             try{
-                const response = await fetch(`${END_POINT}/${updateCustomer.id}`,{
-                    method:"PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(updateCustomer),
-                })
-                if (!response.ok) {
-                    throw new Error("Failed to update product");
-                }
-                const updatedCustomer:TCustomer = await response.json();
+                const response:AxiosResponse<TCustomer> = await axiosInstance.put(`/customers/${updateCustomer.id}`,{data:updateCustomer})
+                const updatedCustomer:TCustomer = response.data;
                 setCustomers(prev => prev.map(customer => customer.id === updatedCustomer.id?updateCustomer:customer));
                 alert(`${updatedCustomer.email}を更新しました`);
                 setEditingCustomer(updatedCustomer);
@@ -67,17 +58,9 @@ export const Customers = () => {
     const addHandler = ()=>{
         const addCustomer = async(addCust:TCustomer)=>{
             try{
-                const response = await fetch(END_POINT,{
-                    method:"POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({email:addCust.email,password:addCust.password}),
-                })
-                if (!response.ok) {
-                    throw new Error("Failed to add product");
-                }
-                const addedCustomer:TCustomer = await response.json();
+                const data = {email:addCust.email,password:addCust.password};
+                const response:AxiosResponse<TCustomer> =await axiosInstance.post('/customers',data)
+                const addedCustomer:TCustomer = response.data
                 console.log(addedCustomer)
                 setCustomers(prev => [...prev,addedCustomer]);
                 alert(`${addedCustomer.email}を追加しました`);

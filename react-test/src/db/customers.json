@@ -1,9 +1,12 @@
 {
   "customers": [
     {
-      "id": "1",
-      "email": "test.test@gmail.com",
-      "password": "pass"
+      "data": {
+        "id": "1",
+        "email": "test.test@gmail.com",
+        "password": "passAAA"
+      },
+      "id": "1"
     },
     {
       "id": "2",
