@@ -1,23 +1,12 @@
 import { useEffect, useState } from 'react'
+import { useTimer } from './useTimer';
 
 const q = "パンはパンでも食べられないパンは？"
 const a = "フライパン"
 
 export const Quiz = () => {
-    const [time,setTime] = useState<number>(0);
-    const [isRunning, setIsRunning] = useState(true);
     const [answer ,setAnswer] = useState("");
-    useEffect(()=>{
-        let interval:number | undefined;
-        if(isRunning){
-            interval = window.setInterval(()=>{
-                setTime(prev => ++prev)
-            },1000)
-        }
-        return ()=>{
-            if(interval)window.clearInterval(interval);
-        }
-    },[isRunning])
+    const {stop,time,isRunning} = useTimer(true);
 
     // 回答の入力イベント
     const changeHandler = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -26,7 +15,7 @@ export const Quiz = () => {
     // 回答ボタンのクリックハンドラ
     const clickHander =() =>{
         // 一旦タイマーは停止
-        setIsRunning(false);
+        stop()
     }
     return (
         <>
