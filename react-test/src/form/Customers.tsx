@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { TCustomer } from "./types";
-import axios, { AxiosResponse } from "axios";
+import  { AxiosResponse } from "axios";
 import axiosInstance from "./axiosInstance"
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import useCustomers from "./hooks/useCustomers";
 
 
 const defaultCustomer:TCustomer = {
@@ -11,21 +13,23 @@ const defaultCustomer:TCustomer = {
 }
 
 export const Customers = () => {
-    const [customers,setCustomers] = useState<TCustomer[]>([]);
+    const {useSuspenseGetAll} = useCustomers();
     const [editingCustomer,setEditingCustomer] = useState<TCustomer>(defaultCustomer);
     const isEditing = editingCustomer.id !== "";
-    useEffect(()=>{
-        const fetchCustomers = async()=>{
-            const reponse:AxiosResponse<TCustomer[]> = await axiosInstance.get('/customers');
-            setCustomers(reponse.data);
-        }
-        fetchCustomers();
-    },[])
+    const {data} = useSuspenseGetAll();
+    // useEffect(()=>{
+    //     const fetchCustomers = async()=>{
+            
+    //         const result = await getAllCustomers();
+    //         setCustomers(result);
+    //     }
+    //     fetchCustomers();
+    // },[getAllCustomers])
 
     // 詳細ボタンクリックイベント
     const clickHandler=(id:string)=>{
         return ()=>{
-            const target = customers.find(x => x.id === id)!;
+            const target = data.find(x => x.id === id)!;
             setEditingCustomer({...target});
         }; 
     }
@@ -43,7 +47,7 @@ export const Customers = () => {
             try{
                 const response:AxiosResponse<TCustomer> = await axiosInstance.put(`/customers/${updateCustomer.id}`,{data:updateCustomer})
                 const updatedCustomer:TCustomer = response.data;
-                setCustomers(prev => prev.map(customer => customer.id === updatedCustomer.id?updateCustomer:customer));
+                // setCustomers(prev => prev.map(customer => customer.id === updatedCustomer.id?updateCustomer:customer));
                 alert(`${updatedCustomer.email}を更新しました`);
                 setEditingCustomer(updatedCustomer);
             }catch(error){
@@ -62,7 +66,7 @@ export const Customers = () => {
                 const response:AxiosResponse<TCustomer> =await axiosInstance.post('/customers',data)
                 const addedCustomer:TCustomer = response.data
                 console.log(addedCustomer)
-                setCustomers(prev => [...prev,addedCustomer]);
+                // setCustomers(prev => [...prev,addedCustomer]);
                 alert(`${addedCustomer.email}を追加しました`);
                 setEditingCustomer(defaultCustomer);
             }catch(error){
@@ -76,7 +80,7 @@ export const Customers = () => {
         <>
             <ul>
                 {
-                    customers.map(customer => <li key={customer.id}>{customer.email}<button onClick={clickHandler(customer.id)}>詳細</button></li>)
+                    data.map(customer => <li key={customer.id}>{customer.email}<button onClick={clickHandler(customer.id)}>詳細</button></li>)
                 }
             </ul>
             <>

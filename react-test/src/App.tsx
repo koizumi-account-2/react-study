@@ -1,9 +1,13 @@
+import { Suspense } from "react"
 import { Customers } from "./form/Customers"
 
 
 function App() {
   return (  
-    <Customers/>
+    <Suspense fallback={"Aaaaaaaaaaaaaa"}>
+      <Customers/>
+      
+    </Suspense>
   )
 }
 
