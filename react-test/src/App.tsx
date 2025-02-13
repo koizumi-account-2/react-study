@@ -1,12 +1,12 @@
-import { Quiz } from "./customeHook/Quiz"
-import { Timer } from "./customeHook/Timer"
+import { Suspense } from "react"
+import { SuspenseDemo } from "./suspense/SuspenseDemo"
 
 function App() {
   return ( 
-    <>
-      <Timer/>
-      <Quiz/>
-    </> 
+
+      <Suspense fallback={<span>wait...</span>}>
+        <SuspenseDemo/>
+      </Suspense>
   )
 }
 
