@@ -1,12 +1,13 @@
 import { Suspense } from "react"
-import { SuspenseDemo } from "./suspense/SuspenseDemo"
+import { Customers } from "./form/Customers"
+
 
 function App() {
-  return ( 
-
-      <Suspense fallback={<span>wait...</span>}>
-        <SuspenseDemo/>
-      </Suspense>
+  return (  
+    <Suspense fallback={"Aaaaaaaaaaaaaa"}>
+      <Customers/>
+      
+    </Suspense>
   )
 }
 
